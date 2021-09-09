@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  generation: 1
+  labels: 
+    app: nginx
+  name: nginx
+  resourceVersion: "762699"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/nginx
+  uid: 11e1dcb7-a139-407a-9150-6958db5a0706
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21.1-alpine
+        imagePullPolicy: IfNotPresent
