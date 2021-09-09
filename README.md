@@ -1,2 +1,2 @@
 # Kubernetes-practice
-The products of kubernetes courses will be placed in this repository
+The products of kubernetes courses and personal projects to practice will be placed in this repository
