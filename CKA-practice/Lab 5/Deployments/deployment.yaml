@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab5-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: upNready
+      
+  template:
+    metadata:
+      labels:
+        app: upNready
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21.1-alpine
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 9999
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 80
+
+        
+        
